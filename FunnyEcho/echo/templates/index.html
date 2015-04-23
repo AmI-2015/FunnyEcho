@@ -1,0 +1,26 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %} Echo generator {% endblock %}
+
+{% block content %}
+<div class='container'>
+	<h1>Echo</h1>
+	<form action="">
+		<div class="form-group">
+			<label for="inputtext">Input text</label> <input type="text"
+				id="inputtext" name="inputtext" class="form-control">
+		</div>
+		<div class="form-group">
+			<label class="checkbox-inline"> <input type="checkbox"
+				id="reverseBox" value="reverse"> Reverse
+			</label> <label class="checkbox-inline"> <input type="checkbox"
+				id="flipBox" value="flip"> Flip
+			</label>
+		</div>
+		<div class="form-group">
+			<label for="outputtext">Output text</label> <input type="text"
+				id="outputtext" name="outputtext" class="form-control" disabled>
+		</div>
+	</form>
+</div>
+{% endblock %}
