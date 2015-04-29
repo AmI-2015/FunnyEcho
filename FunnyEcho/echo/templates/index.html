@@ -8,7 +8,8 @@
 	<form action="">
 		<div class="form-group">
 			<label for="inputtext">Input text</label> <input type="text"
-				id="inputtext" name="inputtext" class="form-control">
+				id="inputtext" name="inputtext" class="form-control"
+				onkeyup="changed()" >
 		</div>
 		<div class="form-group">
 			<label class="checkbox-inline"> <input type="checkbox"
@@ -23,4 +24,9 @@
 		</div>
 	</form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="/static/script.js"></script>
 {% endblock %}
