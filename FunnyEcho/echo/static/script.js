@@ -57,7 +57,27 @@ $(document).ready(function() {
 		// nothing more to do, now... the request is on its way, and
 		// we must wait untilt the response arrives (and the 'success' function
 		// is called
-		
+
 	}); // end of keyup event handler function
+
+	$("#saveButton").click(function() {
+		var requestdata = {
+			'text': $('#inputtext').val() ,
+			'modified': $('#outputtext').val()
+		};
+		
+		$.ajax({
+			url : '/translations',
+			type : 'POST',
+			contentType : 'application/json',
+			data : JSON.stringify(requestdata),
+			dataType : 'json',
+			success : function(ret) {
+				$('#inputtext').val('');
+				$('#outputtext').val('');
+			} 
+		}) ;
+		return false ;
+	});
 
 }); // end of document ready event handler function

@@ -9,6 +9,8 @@ from flask_bootstrap import Bootstrap
 
 from upsidedown import transform
 
+import queries
+
 app = Flask(__name__)
 Bootstrap(app)
 
@@ -44,6 +46,33 @@ def processText():
     ## return '{"text":"%s"}' % text
     # or, better, also specify the correct mime type
     ## return Response('{"text":"%s"}' % text, mimetype='application/json')    
+
+
+@app.route('/translations', methods=["POST"])
+def translationsPost():
+    data = request.get_json()
+    before = data['text']
+    after = data['modified']
+    
+    itemid = queries.insertTranslation(before, after)
+
+    result = { 'id': itemid }
+    return jsonify(result)
+
+@app.route('/translations', methods=["GET"])
+def translationsGet():
+    result = queries.getAllTranslations()
+    print result
+    resultDict = [ { 'txtid': txtid, 'original': orig, 'modified': modif} for (txtid, orig, modif) in result ]
+    return jsonify(list=resultDict)
+
+@app.route('/translations/<int:txtid>', methods=["GET"])
+def translationsGetByID(txtid):
+    result = queries.getTranslation(txtid)
+    print result
+    resultDict = { 'txtid': result[0], 'original': result[1], 'modified': result[2]}
+    return jsonify(resultDict)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
